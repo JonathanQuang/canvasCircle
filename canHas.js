@@ -3,6 +3,7 @@ var canvasElement = document.getElementById("slate");
 var canvasContext = canvasElement.getContext("2d");
 var shape = "square";
 var lastPoint = [-1,-1];
+var animationFrame = -1;
 
 
 var animate = function(){
@@ -26,12 +27,15 @@ var animate = function(){
 		
 		
 		
-		window.requestAnimationFrame(drawCircle);
+		animationFrame = window.requestAnimationFrame(drawCircle);
 	}
 	drawCircle();
 }
 
-
+var clearCanvas = function(){
+	window.cancelAnimationFrame(animationFrame);
+	canvasContext.clearRect(0,0,500,500);
+}
 
 document.getElementById("circleButton").addEventListener("click",animate);
 
